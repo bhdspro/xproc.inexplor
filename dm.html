@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XPROC | Consultoria Inexplor</title>
+    <link rel="icon" type="image/png" href="https://inexplor.com/cecbf4703a2aa92ab378c064f0550d14.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body {
+            background-color: #f04e23;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            color: white;
+            text-shadow: 1px 1px 0 #464b52, -1px -1px 0 #464b52, 1px -1px 0 #464b52, -1px 1px 0 #464b52;
+            margin: 0;
+            text-align: center;
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        input {
+            border: 2px solid #191c1f;
+            border-radius: 25px;
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            margin-right: 10px;
+        }
+        button {
+            background-color: white;
+            border: 2px solid #191c1f;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        button:hover {
+            background-color: #32cd32;
+            color: white;
+        }
+        .error-message {
+            color: white;
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+            text-align: center;
+        }
+        /* Estilo e posição do logotipo */
+        #dvd-logo {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            top: 20px;
+            left: calc(50% - 50px);
+            z-index: 1;
+        }
+        /* Estilos para o container dos botões */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        /* Estilos dos botões personalizados */
+        .custom-button {
+            background-color: #f04e23;
+            border: 2px solid white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            width: 250px;
+            text-align: center;
+        }
+        .custom-button:hover {
+            background-color: #32cd32;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
+    <h1>🔥 Afilie-se ao <span id="typing-text"></span> oculto da Hotmart</h1>
+    
+    <div class="input-container">
+        <input type="text" id="hotmart-link" placeholder="🌐 Cole aqui o link do checkout" />
+        <button onclick="checkLink()">
+            <span style="font-size: 24px;">➔</span>
+        </button>
+    </div>
+
+    <div class="error-message" id="error-message">🚨 Ops! O link correto deve começar com https://pay.hotmart.com/...</div>
+
+    <!-- Container dos botões personalizados -->
+    <div class="button-container">
+        <a href="https://go.inexplor.com/comunidade" target="_blank" class="custom-button">🤯 Produtos Ocultos (Acesso Vitalício)</a>
+        <a href="https://go.inexplor.com/link/suporte-pagina-xproc" target="_blank" class="custom-button">😕 Estou com Dúvidas</a>
+    </div>
+
+    <script>
+        const words = ["produto", "lançamento"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let currentWord = "";
+        let isDeleting = false;
+        const typingElement = document.getElementById("typing-text");
+
+        function type() {
+            currentWord = words[wordIndex];
+            if (isDeleting) {
+                typingElement.innerText = currentWord.substring(0, charIndex--);
+                if (charIndex < 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
+            } else {
+                typingElement.innerText = currentWord.substring(0, charIndex++);
+                if (charIndex > currentWord.length) {
+                    isDeleting = true;
+                }
+            }
+            setTimeout(type, isDeleting ? 150 : 300);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(type, 500);
+
+            const hotmartInput = document.getElementById('hotmart-link');
+            const errorMessage = document.getElementById('error-message');
+
+            hotmartInput.addEventListener('focus', () => {
+                errorMessage.style.display = 'none';
+            });
+        });
+
+        function checkLink() {
+            const input = document.getElementById('hotmart-link').value;
+            const errorMessage = document.getElementById('error-message');
+            const hotmartLinkPattern = /^https:\/\/(pay|payment)\.hotmart\.com\/(\w+)/;
+            
+            if (hotmartLinkPattern.test(input)) {
+                const productCode = input.match(hotmartLinkPattern)[2];
+                const whatsappNumber = '5543991228540';
+                const whatsappMessage = `Consulte o Produto Oculto: ${productCode}`;
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+                
+                window.open(whatsappUrl, '_blank');
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
