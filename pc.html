@@ -1,127 +1,253 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
+    <!-- Configuração do documento e importação de estilos e fontes -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produto Concorrente</title>
-    <link href="https://fonts.googleapis.com/css2?family=Canva+Sans&display=swap" rel="stylesheet">
+    <title>Consultoria Inexplor</title>
+    
+    <!-- Ícone da aba do navegador -->
+    <link rel="icon" type="image/png" href="https://inexplor.com/cecbf4703a2aa92ab378c064f0550d14.png">
+    
+    <!-- Estilos internos para aparência e layout da página -->
     <style>
+        /* Fonte importada do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        
+        /* Estilo do corpo da página */
         body {
-            font-family: 'Canva Sans', sans-serif;
-            background: url('https://www.example.com/pattern.svg');
-            background-size: 100px 100px; /* Ajuste o tamanho do padrão */
+            background-color: #f04e23; /* Cor de fundo vermelha */
+            font-family: 'Roboto', sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            color: white; /* Texto em branco */
+            overflow: hidden;
+            position: relative;
         }
 
-        .container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-
+        /* Estilo do título principal */
         h1 {
-            font-size: 24px;
-            color: #333;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            border-radius: 25px;
-            border: 2px solid #ccc;
-            width: 80%;
-            font-size: 16px;
-        }
-
-        .whatsapp-button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #6200ea;
             color: white;
-            border: none;
-            display: inline-flex;
+            text-shadow: 1px 1px 0 #464b52, -1px -1px 0 #464b52, 1px -1px 0 #464b52, -1px 1px 0 #464b52; /* Sombra */
+            margin-bottom: 10px;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Efeito de digitação */
+        .typing {
+            border-right: 2px solid #191c1f;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: blink-caret 0.75s step-end infinite; /* Animação de piscar */
+            margin: 0 5px;
+        }
+
+        /* Animação de piscar */
+        @keyframes blink-caret {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* Container do input e botão */
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Estilo do campo de input */
+        input {
+            border: 2px solid #191c1f;
+            border-radius: 25px;
+            padding: 10px;
+            font-size: 16px;
+            width: 70%;
+            max-width: 500px;
+            margin-right: 10px;
+        }
+
+        /* Estilo do botão */
+        button {
+            background-color: white;
+            border: 2px solid #191c1f;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 20px;
-            margin-left: 10px;
         }
 
-        .whatsapp-button:hover {
-            background-color: #3700b3;
-        }
-
-        .button-group {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .button-group a {
-            text-decoration: none;
-            width: 48%;
-        }
-
-        .button {
-            padding: 12px 24px;
-            font-size: 16px;
-            border-radius: 25px;
-            cursor: pointer;
-            background-color: #6200ea;
+        /* Mudança de cor ao passar o mouse sobre o botão */
+        button:hover {
+            background-color: #32cd32;
             color: white;
-            border: none;
-            transition: background-color 0.3s;
-            display: inline-block;
+        }
+
+        /* Mensagem de erro */
+        .error-message {
+            color: white;
+            margin-top: 10px;
+            font-weight: bold;
+            display: none; /* Oculta inicialmente */
+        }
+
+        /* Container para botões personalizados */
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        /* Botões personalizados para ações adicionais */
+        .custom-button {
+            background-color: #f04e23;
+            border: 2px solid white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
             text-align: center;
-        }
-
-        .button:hover {
-            background-color: #3700b3;
-        }
-
-        .footer-button {
+            text-decoration: none;
             display: inline-block;
-            width: 48%;
+            cursor: pointer;
         }
 
-        .footer-button:first-child {
-            margin-right: 10px;
+        /* Mudança de cor ao passar o mouse sobre o botão personalizado */
+        .custom-button:hover {
+            background-color: #32cd32;
+        }
+
+        /* Estilo e posição do logotipo */
+        #dvd-logo {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            pointer-events: none; /* Desativa interações com o mouse */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Descubra o produto do seu concorrente</h1>
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <input type="text" id="productInput" placeholder="Digite o código do produto">
-            <button class="whatsapp-button" onclick="sendToWhatsApp()">➡</button>
-        </div>
-        <div class="button-group">
-            <a href="https://inexplor.com" class="button footer-button">Produto Oculto</a>
-            <a href="https://meuwhatsapp.com/3932" class="button footer-button">Preciso de Ajuda</a>
-        </div>
+    <!-- Título com efeito de digitação -->
+    <h1>🔥 Afilie-se ao <span id="typing-text" class="typing"></span> oculto da Hotmart</h1>
+    
+    <!-- Campo de input e botão de verificação -->
+    <div class="input-container">
+        <input type="text" id="hotmart-link" placeholder="🌐 Cole o link da página de pagamento da Hotmart que você copiou" />
+        <button onclick="checkLink()">
+            <span style="font-size: 24px;">➔</span>
+        </button>
+    </div>
+    
+    <!-- Mensagem de erro, inicialmente oculta -->
+    <div class="error-message" id="error-message">🚨 Ops! O link correto deve começar com https://pay.hotmart.com/...</div>
+
+    <!-- Container para botões adicionais -->
+    <div class="button-container">
+        <a href="https://inexplor.com" target="_blank" class="custom-button">Quero +135 Produtos Ocultos</a>
+        <a href="https://api.whatsapp.com/send?phone=5543991228540&text=Ol%C3%A1%2C%20quero%20ajuda%20sobre%20a%20Ferramenta%20PROC" target="_blank" class="custom-button">Preciso de Ajuda com o Site</a>
     </div>
 
+    <!-- Logotipo que se move na tela -->
+    <img src="https://i.ibb.co/K9Gknzm/Logo-Inexplor.png" id="dvd-logo">
+    
     <script>
-        function sendToWhatsApp() {
-            const productCode = document.getElementById('productInput').value.trim();
-            if (productCode) {
-                const message = `HP${productCode}`;
-                const url = `https://wa.me/5543991228540?text=${encodeURIComponent(message)}`;
-                window.open(url, '_blank');
+        /* Texto para o efeito de digitação */
+        const words = ["produto", "lançamento"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let currentWord = "";
+        let isDeleting = false;
+        const typingElement = document.getElementById("typing-text");
+        const dvdLogo = document.getElementById("dvd-logo");
+
+        /* Função de digitação e apagamento do texto */
+        function type() {
+            currentWord = words[wordIndex];
+            if (isDeleting) {
+                typingElement.innerText = currentWord.substring(0, charIndex--);
+                if (charIndex < 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
             } else {
-                alert('Por favor, insira um código de produto.');
+                typingElement.innerText = currentWord.substring(0, charIndex++);
+                if (charIndex > currentWord.length) {
+                    isDeleting = true;
+                }
             }
+            setTimeout(type, isDeleting ? 150 : 300);
+        }
+
+        /* Inicialização ao carregar a página */
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(type, 500);
+            animateDVDLogo();
+
+            document.getElementById('hotmart-link').addEventListener('focus', () => {
+                document.getElementById('error-message').style.display = 'none';
+            });
+        });
+
+        /* Verificação do link e redirecionamento para o WhatsApp */
+        function checkLink() {
+            const input = document.getElementById('hotmart-link').value;
+            const errorMessage = document.getElementById('error-message');
+            const hotmartLinkPattern = /^https:\/\/(pay|payment)\.hotmart\.com\/(\w+)/;
+            
+            if (hotmartLinkPattern.test(input)) {
+                const productCode = input.match(hotmartLinkPattern)[2];
+                const whatsappNumber = '5543991228540';
+                const whatsappMessage = `Consulte o Produto Oculto: ${productCode}`;
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+                
+                window.open(whatsappUrl, '_blank');
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        /* Animação de movimento do logotipo na tela */
+        function animateDVDLogo() {
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const logoWidth = dvdLogo.clientWidth;
+            const logoHeight = dvdLogo.clientHeight;
+            let x = 0;
+            let y = 0;
+            let dx = 1;
+            let dy = 1;
+
+            function moveLogo() {
+                x += dx;
+                y += dy;
+                dvdLogo.style.left = x + "px";
+                dvdLogo.style.top = y + "px";
+
+                if (x + logoWidth >= screenWidth || x <= 0) {
+                    dx = -dx;
+                }
+                if (y + logoHeight >= screenHeight || y <= 0) {
+                    dy = -dy;
+                }
+
+                requestAnimationFrame(moveLogo);
+            }
+
+            moveLogo();
         }
     </script>
 </body>
 </html>
+
